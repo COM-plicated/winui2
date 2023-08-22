@@ -24,6 +24,7 @@ ProgressBar::ProgressBar()
     RegisterPropertyChangedCallback(winrt::RangeBase::MinimumProperty(), { this, &ProgressBar::OnIndicatorWidthComponentChanged });
     RegisterPropertyChangedCallback(winrt::RangeBase::MaximumProperty(), { this, &ProgressBar::OnIndicatorWidthComponentChanged });
     RegisterPropertyChangedCallback(winrt::Control::PaddingProperty(), { this, &ProgressBar::OnIndicatorWidthComponentChanged });
+    RegisterPropertyChangedCallback(winrt::UIElement::VisibilityProperty(), { this, &ProgressBar::OnVisibilityPropertyChanged });
 
     SetValue(s_TemplateSettingsProperty, winrt::make<::ProgressBarTemplateSettings>());
 }
@@ -74,6 +75,11 @@ void ProgressBar::OnShowPausedPropertyChanged(const winrt::DependencyPropertyCha
     UpdateStates();
 }
 
+void ProgressBar::OnVisibilityPropertyChanged(const winrt::DependencyObject&, const winrt::DependencyProperty& args)
+{
+    UpdateStates();
+}
+
 void ProgressBar::OnShowErrorPropertyChanged(const winrt::DependencyPropertyChangedEventArgs& args)
 {
     SetProgressBarIndicatorWidth();
@@ -82,7 +88,7 @@ void ProgressBar::OnShowErrorPropertyChanged(const winrt::DependencyPropertyChan
 
 void ProgressBar::UpdateStates()
 {
-    if (IsIndeterminate())
+    if (IsIndeterminate() && Visibility() == winrt::Visibility::Visible)
     {
         if (ShowError())
         {
