@@ -55,10 +55,8 @@ struct ValueHelper
 {
     static T GetDefaultValue()
     {
-#pragma warning(push)
-#pragma warning(disable : 26444) 
-        return T{};    
-#pragma warning(pop)
+        T defaultValue = T{};
+        return defaultValue;
     }
 
     static winrt::IInspectable BoxValueIfNecessary(T const& value)
@@ -130,7 +128,7 @@ void SetDefaultStyleKeyWorker(winrt::IControlProtected const& controlProtected, 
 template <typename TThis>
 void SetDefaultStyleKey(TThis *pThis)
 {
-    SetDefaultStyleKeyWorker(*pThis, pThis->GetRuntimeClassName());
+    SetDefaultStyleKeyWorker(pThis->template try_as<winrt::IControlProtected>(), pThis->GetRuntimeClassName());
 }
 
 template<typename WinRTReturn>
@@ -462,7 +460,7 @@ struct Awaitable
     }
 
     // Registers a callback that will be called when the awaitable is completed.
-    void await_suspend(std::experimental::coroutine_handle<> resume)
+    void await_suspend(std::coroutine_handle<> resume)
     {
         m_wait.attach(
             winrt::check_pointer(
@@ -486,7 +484,7 @@ private:
     static void __stdcall CoroutineCompletedCallback(PTP_CALLBACK_INSTANCE, void* context, PTP_WAIT, TP_WAIT_RESULT) noexcept
     {
         // Resumes anyone waiting on the awaitable.
-        std::experimental::coroutine_handle<>::from_address(context)();
+        std::coroutine_handle<>::from_address(context)();
     }
 
     //

@@ -15,7 +15,7 @@ void UniformGridLayoutState::InitializeForContext(
     IFlowLayoutAlgorithmDelegates* callbacks)
 {
     m_flowAlgorithm.InitializeForContext(context, callbacks);
-    context.LayoutStateCore(*this);
+    context.as<winrt::Microsoft::UI::Xaml::Controls::ILayoutContextOverrides>().LayoutStateCore(*this);
 }
 
 void UniformGridLayoutState::UninitializeForContext(const winrt::VirtualizingLayoutContext& context)

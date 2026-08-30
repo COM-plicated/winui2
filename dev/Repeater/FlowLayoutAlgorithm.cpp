@@ -24,7 +24,7 @@ void FlowLayoutAlgorithm::UninitializeForContext(const winrt::VirtualizingLayout
         // being held and remove the layout state from the context.
         m_elementManager.ClearRealizedRange();
     }
-    context.LayoutStateCore(nullptr);
+    context.as<winrt::Microsoft::UI::Xaml::Controls::ILayoutContextOverrides>().LayoutStateCore(nullptr);
 }
 
 winrt::Size FlowLayoutAlgorithm::Measure(
@@ -160,7 +160,7 @@ int FlowLayoutAlgorithm::GetAnchorIndex(
     if (!IsVirtualizingContext() || disableVirtualization)
     {
         // Non virtualizing host, start generating from the element 0
-        anchorIndex = context.ItemCountCore() > 0 ? 0 : -1;
+        anchorIndex = context.as<winrt::Microsoft::UI::Xaml::Controls::IVirtualizingLayoutContextOverrides>().ItemCountCore() > 0 ? 0 : -1;
     }
     else
     {

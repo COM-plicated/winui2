@@ -431,7 +431,7 @@ void TreeViewList::UpdateDropTargetDropEffect(bool forceUpdate, bool isLeaving, 
         dragItemPeer = winrt::FrameworkElementAutomationPeer::FromElement(dragItem);
         if (dragItemPeer)
         {
-            dragItemString = dragItemPeer.GetNameCore();
+            dragItemString = dragItemPeer.as<winrt::IAutomationPeerOverrides>().GetNameCore();
         }
 
         if (dragItemString.empty())
@@ -455,7 +455,7 @@ void TreeViewList::UpdateDropTargetDropEffect(bool forceUpdate, bool isLeaving, 
                 winrt::AutomationPeer draggedOverItemPeer = winrt::FrameworkElementAutomationPeer::FromElement(m_draggedOverItem.get());
                 if (draggedOverItemPeer)
                 {
-                    draggedOverString = draggedOverItemPeer.GetNameCore();
+                    draggedOverString = draggedOverItemPeer.as<winrt::IAutomationPeerOverrides>().GetNameCore();
                 }
             }
             else
@@ -605,7 +605,7 @@ hstring TreeViewList::GetAutomationName(int index) const
         winrt::AutomationPeer itemPeer = winrt::FrameworkElementAutomationPeer::FromElement(item);
         if (itemPeer)
         {
-            automationName = itemPeer.GetNameCore();
+            automationName = itemPeer.as<winrt::IAutomationPeerOverrides>().GetNameCore();
         }
     }
 

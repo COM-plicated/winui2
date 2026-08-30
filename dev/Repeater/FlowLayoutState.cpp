@@ -21,7 +21,7 @@ void FlowLayoutState::InitializeForContext(
         m_itemsPerLineEstimationBuffer.resize(BufferSize, 0.0f);
     }
 
-    context.LayoutStateCore(*this);
+    context.as<winrt::Microsoft::UI::Xaml::Controls::ILayoutContextOverrides>().LayoutStateCore(*this);
 }
 
 void FlowLayoutState::UninitializeForContext(const winrt::VirtualizingLayoutContext& context)

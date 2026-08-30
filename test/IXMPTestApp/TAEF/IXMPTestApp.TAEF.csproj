@@ -7,6 +7,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NoWarn>$(NoWarn);NU1505</NoWarn>
     <DisableCheckingDuplicateNuGetItems>true</DisableCheckingDuplicateNuGetItems>
+    <RuntimeIdentifiers>win10-x86;win10-x86-aot;win10-x64;win10-x64-aot;win10-arm;win10-arm-aot</RuntimeIdentifiers>
   </PropertyGroup>
   <PropertyGroup>
     <ProjectGuid>{74F24BC4-794D-4CB2-8420-80FF7FDACFE9}</ProjectGuid>
@@ -16,6 +17,23 @@
       <Project>{128e6f7a-578c-48dc-bd3f-750ec662c268}</Project>
       <Name>AppTestAutomationHelpers</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Net.Native.Compiler">
+      <Version>2.2.3</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
+      <Version>6.2.8</Version>
+    </PackageReference>
+    <PackageReference Include="MUXCustomBuildTasks">
+      <Version>1.0.74</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="TAEF.Redist.Wlk">
+      <Version>10.31.180822002</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="..\IXMPTestApp.Shared.projitems" />
 </Project>

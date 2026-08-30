@@ -59,9 +59,9 @@ void Expander::OnApplyTemplate()
             // we will try setting one based on the header. This is how
             // WPF's expanders work.
             if (winrt::AutomationProperties::GetName(*this).empty()
-                && !toggleButtonPeer.GetNameCore().empty())
+                && !toggleButtonPeer.as<winrt::IAutomationPeerOverrides>().GetNameCore().empty())
             {
-                winrt::AutomationProperties::SetName(*this, toggleButtonPeer.GetNameCore());
+                winrt::AutomationProperties::SetName(*this, toggleButtonPeer.as<winrt::IAutomationPeerOverrides>().GetNameCore());
             }
         }
     }

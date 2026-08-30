@@ -566,7 +566,7 @@ void ItemsRepeater::OnDataSourcePropertyChanged(const winrt::ItemsSourceView& ol
             });
         m_processingItemsSourceChange.set(args);
 
-        if (auto const virtualLayout = layout.try_as<winrt::VirtualizingLayout>())
+        if (auto const virtualLayout = layout.try_as<winrt::IVirtualizingLayoutOverrides>())
         {
             virtualLayout.OnItemsChangedCore(GetLayoutContext(), newValue, args);
         }
@@ -614,7 +614,7 @@ void ItemsRepeater::OnItemTemplateChanged(const winrt::IElementFactory& oldValue
             });
         m_processingItemsSourceChange.set(args);
 
-        if (auto const virtualLayout = layout.try_as<winrt::VirtualizingLayout>())
+        if (auto const virtualLayout = layout.try_as<winrt::IVirtualizingLayoutOverrides>())
         {
             virtualLayout.OnItemsChangedCore(GetLayoutContext(), newValue, args);
         }
@@ -761,7 +761,7 @@ void ItemsRepeater::OnItemsSourceViewChanged(const winrt::IInspectable& sender, 
 
     if (auto layout = Layout())
     {
-        if (auto virtualLayout = layout.try_as<winrt::VirtualizingLayout>())
+        if (auto virtualLayout = layout.try_as<winrt::IVirtualizingLayoutOverrides>())
         {
             virtualLayout.OnItemsChangedCore(GetLayoutContext(), sender, args);
         }

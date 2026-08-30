@@ -77,7 +77,7 @@ void AutoSuggestBoxHelper::OnAutoSuggestBoxLoaded(const winrt::IInspectable& sen
 
     if (!revokers->m_popupOpenedRevoker || !revokers->m_popupClosedRevoker)
     {
-        if (auto popup = GetTemplateChildT<winrt::Popup>(c_popupName, autoSuggestBox))
+        if (auto popup = GetTemplateChildT<winrt::Popup>(c_popupName, autoSuggestBox.as<winrt::IControlProtected>()))
         {
             auto autoSuggestBoxWeakRef = winrt::make_weak(autoSuggestBox);
 
@@ -124,12 +124,12 @@ void AutoSuggestBoxHelper::UpdateCornerRadius(const winrt::AutoSuggestBox& autoS
         textBoxRadius = cornerRadiusConverter->Convert(textBoxRadius, textBoxRadiusFilter);
     }
 
-    if (auto popupBorder = GetTemplateChildT<winrt::Border>(c_popupBorderName, autoSuggestBox))
+    if (auto popupBorder = GetTemplateChildT<winrt::Border>(c_popupBorderName, autoSuggestBox.as<winrt::IControlProtected>()))
     {
         popupBorder.CornerRadius(popupRadius);
     }
 
-    if (auto textBox = GetTemplateChildT<winrt::TextBox>(c_textBoxName, autoSuggestBox))
+    if (auto textBox = GetTemplateChildT<winrt::TextBox>(c_textBoxName, autoSuggestBox.as<winrt::IControlProtected>()))
     {
         if (winrt::IControl7 textBoxControl7 = textBox)
         {
@@ -137,7 +137,7 @@ void AutoSuggestBoxHelper::UpdateCornerRadius(const winrt::AutoSuggestBox& autoS
         }
         else
         {
-            if (auto textBoxBorder = GetTemplateChildT<winrt::Border>(c_textBoxBorderName, textBox))
+            if (auto textBoxBorder = GetTemplateChildT<winrt::Border>(c_textBoxBorderName, textBox.as<winrt::IControlProtected>()))
             {
                 textBoxBorder.CornerRadius(textBoxRadius);
             }
@@ -148,9 +148,9 @@ void AutoSuggestBoxHelper::UpdateCornerRadius(const winrt::AutoSuggestBox& autoS
 bool AutoSuggestBoxHelper::IsPopupOpenDown(const winrt::AutoSuggestBox& autoSuggestBox)
 {
     double verticalOffset = 0;
-    if (auto popupBorder = GetTemplateChildT<winrt::Border>(c_popupBorderName, autoSuggestBox))
+    if (auto popupBorder = GetTemplateChildT<winrt::Border>(c_popupBorderName, autoSuggestBox.as<winrt::IControlProtected>()))
     {
-        if (auto textBox = GetTemplateChildT<winrt::TextBox>(c_textBoxName, autoSuggestBox))
+        if (auto textBox = GetTemplateChildT<winrt::TextBox>(c_textBoxName, autoSuggestBox.as<winrt::IControlProtected>()))
         {
             const auto transform = popupBorder.TransformToVisual(textBox);
             const auto popupTop = transform.TransformPoint(winrt::Point(0, 0));

@@ -13,11 +13,38 @@
     <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
     <NoWarn>$(NoWarn);NU1505</NoWarn>
     <DisableCheckingDuplicateNuGetItems>true</DisableCheckingDuplicateNuGetItems>
+    <RuntimeIdentifiers>win10-x86;win10-x86-aot;win10-x64;win10-x64-aot;win10-arm;win10-arm-aot</RuntimeIdentifiers>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="Package.VS.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DiffPlex">
+      <Version>1.2.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Net.Native.Compiler">
+      <Version>2.2.3</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
+      <Version>6.2.8</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Web.WebView2">
+      <Version>1.0.2849.39</Version>
+    </PackageReference>
+    <PackageReference Include="MUXCustomBuildTasks">
+      <Version>1.0.74</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="TAEF.Redist.Wlk">
+      <Version>10.31.180822002</Version>
+    </PackageReference>
+    <PackageReference Include="Win2D.uwp">
+      <Version>1.22.0</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="..\MUXControlsTestApp.Shared.projitems" />
   <Import Project="..\MUXControlsTestApp.Shared.targets" />

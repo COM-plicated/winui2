@@ -177,7 +177,7 @@ void TabView::SetTabSeparatorOpacity(int index, int opacityValue)
         // must hide the tab separator at all times.
         // It causes two visual states to modify the same property
         // what leads to undesired behaviour.
-        if (const auto tabSeparator = tvi.GetTemplateChild(L"TabSeparator").try_as<winrt::FrameworkElement>())
+        if (const auto tabSeparator = tvi.as<winrt::IControlProtected>().GetTemplateChild(L"TabSeparator").try_as<winrt::FrameworkElement>())
         {
             tabSeparator.Opacity(opacityValue);
         }

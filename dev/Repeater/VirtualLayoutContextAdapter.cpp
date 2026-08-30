@@ -27,7 +27,7 @@ void VirtualLayoutContextAdapter::LayoutStateCore(winrt::IInspectable const& sta
 {
     if (auto context = m_virtualizingContext.get())
     {
-        context.LayoutStateCore(state);
+        context.as<winrt::Microsoft::UI::Xaml::Controls::ILayoutContextOverrides>().LayoutStateCore(state);
     }
 }
 

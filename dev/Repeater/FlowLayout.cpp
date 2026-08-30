@@ -405,7 +405,7 @@ double FlowLayout::GetAverageLineInfo(
     double avgLineSize = 0;
     avgCountInLine = 1;
 
-    MUX_ASSERT(context.ItemCountCore() > 0);
+    MUX_ASSERT(context.as<winrt::Microsoft::UI::Xaml::Controls::IVirtualizingLayoutContextOverrides>().ItemCountCore() > 0);
     if (flowState->TotalLinesMeasured() == 0)
     {
         const auto tmpElement = context.GetOrCreateElementAt(0, winrt::ElementRealizationOptions::ForceCreate | winrt::ElementRealizationOptions::SuppressAutoRecycle);

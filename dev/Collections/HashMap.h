@@ -6,10 +6,10 @@
 template <typename K, typename V>
 class HashMap :
     public ReferenceTracker<
-        HashMap<K, V>,
-        typename reference_tracker_implements_t<winrt::IMap<K, V>>::type,
-        winrt::IMapView<K, V>,
-        winrt::IIterable<winrt::IKeyValuePair<K, V>>>
+    HashMap<K, V>,
+    typename reference_tracker_implements_t<winrt::IMap<K, V>>::type,
+    winrt::IMapView<K, V>,
+    winrt::IIterable<winrt::IKeyValuePair<K, V>>>
 {
     using K_storage = tracker_ref<K>;
     using V_storage = tracker_ref<V>;
@@ -118,8 +118,8 @@ private:
 
     class Iterator :
         public ReferenceTracker<
-            Iterator,
-            reference_tracker_implements_t<winrt::IIterator<KVP>>::type>
+        Iterator,
+        typename reference_tracker_implements_t<winrt::IIterator<KVP>>::type>
     {
     public:
         Iterator(HashMap<K, V>* map)
@@ -195,8 +195,8 @@ private:
 
         class KeyValuePair :
             public ReferenceTracker<
-                KeyValuePair,
-                reference_tracker_implements_t<winrt::IKeyValuePair<K, V>>::type>
+            KeyValuePair,
+            typename reference_tracker_implements_t<winrt::IKeyValuePair<K, V>>::type>
         {
         public:
 

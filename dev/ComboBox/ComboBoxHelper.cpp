@@ -114,12 +114,12 @@ void ComboBoxHelper::UpdateCornerRadius(const winrt::ComboBox& comboBox, bool is
             textBoxRadius = cornerRadiusConverter->Convert(textBoxRadius, textBoxRadiusFilter);
         }
 
-        if (auto popupBorder = GetTemplateChildT<winrt::Border>(c_popupBorderName, comboBox))
+        if (auto popupBorder = GetTemplateChildT<winrt::Border>(c_popupBorderName, comboBox.as<winrt::IControlProtected>()))
         {
             popupBorder.CornerRadius(popupRadius);
         }
 
-        if (auto textBox = GetTemplateChildT<winrt::TextBox>(c_editableTextName, comboBox))
+        if (auto textBox = GetTemplateChildT<winrt::TextBox>(c_editableTextName, comboBox.as<winrt::IControlProtected>()))
         {
             if (winrt::IControl7 textBoxControl7 = textBox)
             {
@@ -127,7 +127,7 @@ void ComboBoxHelper::UpdateCornerRadius(const winrt::ComboBox& comboBox, bool is
             }
             else
             {
-                if (auto textBorder = GetTemplateChildT<winrt::Border>(c_editableTextBorderName, textBox))
+                if (auto textBorder = GetTemplateChildT<winrt::Border>(c_editableTextBorderName, textBox.as<winrt::IControlProtected>()))
                 {
                     textBorder.CornerRadius(textBoxRadius);
                 }
@@ -139,9 +139,9 @@ void ComboBoxHelper::UpdateCornerRadius(const winrt::ComboBox& comboBox, bool is
 bool ComboBoxHelper::IsPopupOpenDown(const winrt::ComboBox& comboBox)
 {
     double verticalOffset = 0;
-    if (auto popupBorder = GetTemplateChildT<winrt::Border>(c_popupBorderName, comboBox))
+    if (auto popupBorder = GetTemplateChildT<winrt::Border>(c_popupBorderName, comboBox.as<winrt::IControlProtected>()))
     {
-        if (auto textBox = GetTemplateChildT<winrt::TextBox>(c_editableTextName, comboBox))
+        if (auto textBox = GetTemplateChildT<winrt::TextBox>(c_editableTextName, comboBox.as<winrt::IControlProtected>()))
         {
             const auto transform = popupBorder.TransformToVisual(textBox);
             const auto popupTop = transform.TransformPoint(winrt::Point(0, 0));
