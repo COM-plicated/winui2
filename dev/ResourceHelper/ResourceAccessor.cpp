@@ -5,6 +5,11 @@
 #include "common.h"
 #include "ResourceAccessor.h"
 
+// When referencing MUX directly and the .pri is not merged with the app's one
+// and instead loaded manually this needs to be uncommented to change the search 
+// path for resources so that it can find them.
+//#define PROJECT_DEPENDENCY_DEBUG
+
 PCWSTR ResourceAccessor::c_resourceLocWinUI{ L"Microsoft.UI.Xaml/Resources" };
 
 #ifdef MUX_EXPERIMENTAL
@@ -28,7 +33,12 @@ winrt::ResourceMap ResourceAccessor::GetResourceMap()
         }
         else
         {
+#ifdef PROJECT_DEPENDENCY_DEBUG
+            winrt::hstring packageName{ MUXCONTROLSROOT_NAMESPACE_STR };
+            return winrt::ResourceManager::Current().AllResourceMaps().Lookup(packageName);
+#else
             return winrt::ResourceManager::Current().MainResourceMap();
+#endif
         }
     }();
 
@@ -83,7 +93,11 @@ winrt::LoadedImageSurface ResourceAccessor::GetImageSurface(const wstring_view &
         }
         else
         {
+#ifdef PROJECT_DEPENDENCY_DEBUG
+            return winrt::Uri{ std::wstring(L"ms-resource://" MUXCONTROLSROOT_NAMESPACE_STR "/Files/Microsoft.UI.Xaml/Assets/") + std::wstring(assetName.data()) + std::wstring(L".png")  };
+#else
             return winrt::Uri{ std::wstring(L"ms-resource:///Files/Microsoft.UI.Xaml/Assets/") + std::wstring(assetName.data()) + std::wstring(L".png") };
+#endif
         }
     }();
     return winrt::LoadedImageSurface::StartLoadFromUri(imageUri, imageSize);
