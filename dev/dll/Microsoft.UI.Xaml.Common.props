@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT License. See LICENSE in the project root for license information. -->
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\packages\Microsoft.Windows.CppWinRT.3.0.260818.1\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('..\..\packages\Microsoft.Windows.CppWinRT.3.0.260818.1\build\native\Microsoft.Windows.CppWinRT.props')" />
+  <Import Project="..\..\packages\COMplicated.CppWinRT.3.0.260715.6\build\native\COMplicated.CppWinRT.props" Condition="Exists('..\..\packages\COMplicated.CppWinRT.3.0.260715.6\build\native\COMplicated.CppWinRT.props')" />
   <Import Project="$(MSBuildProjectDirectory)\..\..\FeatureAreas.props" />
   <Import Project="..\..\packages\Microsoft.SourceLink.GitHub.10.0.400\build\Microsoft.SourceLink.GitHub.props" Condition="Exists('..\..\packages\Microsoft.SourceLink.GitHub.10.0.400\build\Microsoft.SourceLink.GitHub.props')" />
   <Import Project="..\..\packages\Microsoft.SourceLink.Common.10.0.400\build\Microsoft.SourceLink.Common.props" Condition="Exists('..\..\packages\Microsoft.SourceLink.Common.10.0.400\build\Microsoft.SourceLink.Common.props')" />

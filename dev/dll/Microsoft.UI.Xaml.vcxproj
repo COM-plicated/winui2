@@ -10,6 +10,7 @@
     <CppWinRTNamespaceMergeDepth>2</CppWinRTNamespaceMergeDepth>
     <MdMergeNamespaceMergeDepth>3</MdMergeNamespaceMergeDepth>
     <ProjectWinMDName>Microsoft.UI.winmd</ProjectWinMDName>
+    <CppWinRTProjectWinMDFileName>Microsoft.UI.winmd</CppWinRTProjectWinMDFileName>
     <DependencyPropertyCodeGenOutputDirectory>$(MSBuildThisFileDirectory)..\Generated</DependencyPropertyCodeGenOutputDirectory>
     <NoWarn>$(NoWarn);C26496;C26462</NoWarn>
   </PropertyGroup>
