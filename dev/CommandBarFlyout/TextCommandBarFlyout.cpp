@@ -239,8 +239,7 @@ void TextCommandBarFlyout::UpdateButtons()
                         // to occur in the future.
                         if (strongThis->m_proofingButton)
                         {
-                            auto peer = winrt::Windows::UI::Xaml::Automation::Peers::FrameworkElementAutomationPeer::CreatePeerForElement(strongThis->m_proofingButton)
-                                .as<winrt::Windows::UI::Xaml::Automation::Peers::ButtonAutomationPeer>();
+                            auto peer = strongThis->m_proofingButton.as<winrt::IUIElementOverrides>().OnCreateAutomationPeer().as<winrt::ButtonAutomationPeer>();
                             peer.Invoke();
                         }
                     };
