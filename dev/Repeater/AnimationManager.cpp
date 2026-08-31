@@ -21,15 +21,15 @@ void AnimationManager::OnAnimatorChanged(const winrt::ElementAnimator& newAnimat
     // to the view generator.
     if (m_animator)
     {
-        MUX_ASSERT(m_hideAnimationCompleted.value);
-        m_animator.get().HideAnimationCompleted(m_hideAnimationCompleted);
+        MUX_ASSERT(m_hideAnimationCompleted);
+        m_hideAnimationCompleted = {};
     }
 
     m_animator.set(newAnimator);
 
     if (newAnimator)
     {
-        m_hideAnimationCompleted = newAnimator.HideAnimationCompleted({ this, &AnimationManager::OnHideAnimationCompleted });
+        m_hideAnimationCompleted = newAnimator.HideAnimationCompleted(winrt::auto_revoke, { this, &AnimationManager::OnHideAnimationCompleted });
     }
 }
 

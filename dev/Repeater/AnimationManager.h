@@ -37,5 +37,5 @@ private:
     bool m_hasRecordedLayoutTransitions{};
 
     // Event tokens
-    winrt::event_token m_hideAnimationCompleted{};
+    winrt::ElementAnimator::HideAnimationCompleted_revoker m_hideAnimationCompleted;
 };
