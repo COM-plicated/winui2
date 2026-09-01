@@ -51,6 +51,7 @@ ItemsRepeater::ItemsRepeater()
 
 ItemsRepeater::~ItemsRepeater()
 {
+    m_animationManager.OnAnimatorChanged(nullptr);
     m_itemTemplate = nullptr;
     m_animator = nullptr;
     m_layout = nullptr;
