@@ -446,10 +446,20 @@ void PagerControl::UpdateOnEdgeButtonVisualStates()
     // Handle disabled/enabled status of buttons
     if (selectedPageIndex == 0)
     {
-        winrt::VisualStateManager::GoToState(*this, c_firstPageButtonDisabledVisualState, false);
-        winrt::VisualStateManager::GoToState(*this, c_previousPageButtonDisabledVisualState, false);
-        winrt::VisualStateManager::GoToState(*this, c_nextPageButtonEnabledVisualState, false);
-        winrt::VisualStateManager::GoToState(*this, c_lastPageButtonEnabledVisualState, false);
+        if (numberOfPages == 1)
+        {
+            winrt::VisualStateManager::GoToState(*this, c_firstPageButtonDisabledVisualState, false);
+            winrt::VisualStateManager::GoToState(*this, c_previousPageButtonDisabledVisualState, false);
+            winrt::VisualStateManager::GoToState(*this, c_nextPageButtonDisabledVisualState, false);
+            winrt::VisualStateManager::GoToState(*this, c_lastPageButtonDisabledVisualState, false);
+        }
+        else
+        {
+            winrt::VisualStateManager::GoToState(*this, c_firstPageButtonDisabledVisualState, false);
+            winrt::VisualStateManager::GoToState(*this, c_previousPageButtonDisabledVisualState, false);
+            winrt::VisualStateManager::GoToState(*this, c_nextPageButtonEnabledVisualState, false);
+            winrt::VisualStateManager::GoToState(*this, c_lastPageButtonEnabledVisualState, false);
+        }
     }
     else if (selectedPageIndex >= numberOfPages - 1)
     {
