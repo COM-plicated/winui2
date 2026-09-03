@@ -37,7 +37,7 @@ jobs:
           .empty
   publishWinUI:
     name: Publish Nuget package
-    runs-on: windows-2026
+    runs-on: windows-2025
     needs: buildWinUI
     steps:
     - name: Checkout
