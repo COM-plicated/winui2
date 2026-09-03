@@ -54,7 +54,7 @@ class AnimatedSettingsVisualSource
     winrt::Windows::UI::Color _themeForeground{ 0xFF, 0x13, 0x17, 0x18 };
     winrt::Windows::UI::Composition::CompositionPropertySet EnsureThemeProperties(winrt::Windows::UI::Composition::Compositor compositor);
 
-    static winrt::Windows::Foundation::Numerics::float4 ColorAsVector4(winrt::Windows::UI::Color color);
+    static constexpr winrt::Windows::Foundation::Numerics::float4 ColorAsVector4(winrt::Windows::UI::Color color);
 public:
     // Animation duration: 2.000 seconds.
     static constexpr int64_t c_durationTicks{ 20000000L };

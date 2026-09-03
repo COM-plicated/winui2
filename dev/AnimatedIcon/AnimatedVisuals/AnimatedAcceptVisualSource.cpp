@@ -1870,7 +1870,7 @@ public:
     }
 };
 
-winrt::float4 AnimatedAcceptVisualSource::ColorAsVector4(Color color)
+constexpr winrt::float4 AnimatedAcceptVisualSource::ColorAsVector4(Color color)
 {
     return { static_cast<float>(color.R), static_cast<float>(color.G), static_cast<float>(color.B), static_cast<float>(color.A) };
 }

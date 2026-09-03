@@ -79,7 +79,7 @@ class AnimatedChevronRightDownSmallVisualSource
     winrt::Windows::UI::Color _themeForeground{ 0xFF, 0x06, 0x08, 0x08 };
     winrt::Windows::UI::Composition::CompositionPropertySet EnsureThemeProperties(winrt::Windows::UI::Composition::Compositor compositor);
 
-    static winrt::Windows::Foundation::Numerics::float4 ColorAsVector4(winrt::Windows::UI::Color color);
+    static constexpr winrt::Windows::Foundation::Numerics::float4 ColorAsVector4(winrt::Windows::UI::Color color);
 public:
     // Animation duration: 3.667 seconds.
     static constexpr int64_t c_durationTicks{ 36666666L };

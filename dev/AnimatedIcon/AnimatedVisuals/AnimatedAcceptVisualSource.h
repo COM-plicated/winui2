@@ -81,7 +81,7 @@ class AnimatedAcceptVisualSource
     winrt::Windows::UI::Color _themeForeground{ 0xFF, 0x00, 0x00, 0x00 };
     winrt::Windows::UI::Composition::CompositionPropertySet EnsureThemeProperties(winrt::Windows::UI::Composition::Compositor compositor);
 
-    static winrt::Windows::Foundation::Numerics::float4 ColorAsVector4(winrt::Windows::UI::Color color);
+    static constexpr winrt::Windows::Foundation::Numerics::float4 ColorAsVector4(winrt::Windows::UI::Color color);
 public:
     // Animation duration: 2.667 seconds.
     static constexpr int64_t c_durationTicks{ 26666666L };
