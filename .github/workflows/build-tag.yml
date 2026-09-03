@@ -21,6 +21,8 @@ jobs:
         msbuild-architecture: x64
     - name: Build
       run: |
+        dotnet nuget config set globalPackagesFolder ".\packages" --configfile nuget.config
+        dotnet nuget config set repositoryPath ".\packages" --configfile nuget.config
         MSBuild dev\dll\Microsoft.UI.Xaml.vcxproj -nologo -r -v:minimal -m:2 /p:CL_MPCount=2 /p:RestorePackagesConfig=true /p:Configuration=Release /p:Platform=${{ matrix.arch }}
         MSBuild dev\Microsoft.UI.Xaml.Design\Microsoft.UI.Xaml.Design.csproj -nologo -r -v:minimal /p:Configuration=Release /p:Platform=${{ matrix.arch }}
         MSBuild dev\Projection\Microsoft.UI.Xaml.Projection.csproj -nologo -r -v:minimal /p:Configuration=Release /p:Platform=${{ matrix.arch }}
