@@ -80,7 +80,7 @@ if ($prereleaseversion)
 
 if (!(Test-Path $OutputDir)) { mkdir $OutputDir }
 
-$nupkgtitle = "Microsoft.UI.Xaml"
+$nupkgtitle = "COMplicated.WinUI"
 
 function New-TemporaryDirectory {
     $parent = [System.IO.Path]::GetTempPath()

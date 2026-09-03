@@ -4,14 +4,14 @@
     <id>$ID$</id>
     <version>0.0.0-SpecifyVersionOnCommandline</version>
     <title>Windows UI Library</title>
-    <authors>Microsoft</authors>
-    <owners>Microsoft</owners>
+    <authors>Microsoft,COMplicated,Guerra24</authors>
+    <owners>COMplicated,Guerra24</owners>
     <description>This package provides backward-compatible versions of Windows UI features including UWP XAML controls, and Fluent styles and materials. It is part of the Windows UI Library.</description>
-    <copyright>© Microsoft Corporation. All rights reserved.</copyright>
+    <copyright>© Microsoft Corporation &amp; COMplicated. All rights reserved.</copyright>
     <tags>Windows WinUI UWP XAML Fluent Controls Downlevel Compatibility TreeView ColorPicker NavigationView MenuBar</tags>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <license type="file">license.txt</license>
-    <projectUrl>https://github.com/microsoft/microsoft-ui-xaml</projectUrl>
+    <projectUrl>https://github.com/COM-plicated/winui2</projectUrl>
     <iconUrl>https://aka.ms/winui_icon</iconUrl>
 
     <dependencies>

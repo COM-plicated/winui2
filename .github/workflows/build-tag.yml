@@ -1,0 +1,54 @@
+name: Build prerelease on tag
+on: 
+  push:
+    branches:
+    - winui2/refresh
+#    tags:
+#      - "v*"
+jobs:
+  buildWinUI:
+    name: Build project
+    runs-on: windows-2022
+    strategy:
+      matrix:
+        arch: [x86, x64, ARM, arm64]
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v6
+    - name: Prepare Environment
+      uses: microsoft/setup-msbuild@v3
+      with:
+        msbuild-architecture: x64
+    - name: Build
+      run: |
+        MSBuild dev\dll\Microsoft.UI.Xaml.vcxproj -nologo -r -v:minimal -m:2 /p:CL_MPCount=2 /p:RestorePackagesConfig=true /p:Configuration=Release /p:Platform=${{ matrix.arch }}
+        MSBuild dev\Microsoft.UI.Xaml.Design\Microsoft.UI.Xaml.Design.csproj -nologo -r -v:minimal /p:Configuration=Release /p:Platform=${{ matrix.arch }}
+        MSBuild dev\Projection\Microsoft.UI.Xaml.Projection.csproj -nologo -r -v:minimal /p:Configuration=Release /p:Platform=${{ matrix.arch }}
+    - name: Upload compiled files
+      uses: actions/upload-artifact@v7
+      with:
+        name: intermediates
+        retention-days: 1
+        path: |
+          BuildOutput/Release/${{ matrix.arch }}
+          .empty
+  publishWinUI:
+    name: Publish Nuget package
+    runs-on: windows-2026
+    needs: buildWinUI
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v6
+    - name: Download intermediates
+      uses: actions/download-artifact@v8
+      with:
+        name: intermediates
+    - name: Create package
+      run: |
+        .\build\NuSpecs\build-nupkg.ps1 -BuildOutput "..\..\BuildOutput" -BuildFlavor "Release" -BuildArch "x64" -OutputDir "..\..\NugetPackage" -prereleaseversion "prerelease" -SkipFrameworkPackage
+    - name: Upload nuget
+      uses: actions/upload-artifact@v5
+      with:
+        name: nuget
+        retention-days: 1
+        path: NugetPackage
