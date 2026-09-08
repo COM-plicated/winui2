@@ -28,7 +28,7 @@ jobs:
     - name: Upload compiled files
       uses: actions/upload-artifact@v7
       with:
-        name: intermediates-${{ matrix.arch }}
+        name: intermediates-full-${{ matrix.arch }}
         retention-days: 1
         path: |
           BuildOutput/Release/${{ matrix.arch }}
@@ -51,7 +51,7 @@ jobs:
     - name: Download intermediates
       uses: actions/download-artifact@v8
       with:
-        pattern: intermediates-*
+        pattern: intermediates-full-*
         merge-multiple: true
     - name: Create package
       run: |
@@ -61,5 +61,62 @@ jobs:
       uses: actions/upload-artifact@v7
       with:
         name: nuget
+        path: NugetPackage
+  buildWinUILite:
+    name: Build project
+    runs-on: windows-2022
+    strategy:
+      matrix:
+        arch: [x86, x64, ARM, arm64]
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v6
+    - name: Prepare Environment
+      uses: microsoft/setup-msbuild@v3
+      with:
+        msbuild-architecture: x64
+    - name: Build
+      run: |
+        dotnet nuget config set globalPackagesFolder ".\packages" --configfile nuget.config
+        dotnet nuget config set repositoryPath ".\packages" --configfile nuget.config
+        .\build\PrepareVersion.ps1
+        MSBuild dev\dll\Microsoft.UI.Xaml.vcxproj -nologo -r -v:minimal /p:CL_MPCount=4 /p:RestorePackagesConfig=true /p:Configuration=Release /p:MUXVersionBuild=$env:MUXVersionBuild /p:MUXVersionRevision=$env:MUXVersionRevision /p:FeatureWebView2Enabled=false /p:Platform=${{ matrix.arch }}
+        MSBuild dev\Microsoft.UI.Xaml.Design\Microsoft.UI.Xaml.Design.csproj -nologo -r -v:minimal /p:Configuration=Release /p:Platform=${{ matrix.arch }}
+        MSBuild dev\Projection\Microsoft.UI.Xaml.Projection.csproj -nologo -r -v:minimal /p:Configuration=Release /p:MUXVersionBuild=$env:MUXVersionBuild /p:MUXVersionRevision=$env:MUXVersionRevision /p:FeatureWebView2Enabled=false /p:Platform=${{ matrix.arch }}
+    - name: Upload compiled files
+      uses: actions/upload-artifact@v7
+      with:
+        name: intermediates-lite-${{ matrix.arch }}
         retention-days: 1
+        path: |
+          BuildOutput/Release/${{ matrix.arch }}
+          .empty
+  publishWinUILite:
+    name: Publish Nuget package
+    runs-on: windows-2025
+    needs: buildWinUILite
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v6
+    - name: Login nuget
+      uses: NuGet/login@v1
+      id: login
+      with:
+        user: ${{ github.actor }}
+    - name: Download intermediates
+      uses: actions/download-artifact@v8
+      with:
+        pattern: intermediates-lite-*
+        merge-multiple: true
+    - name: Create package
+      run: |
+        .\build\NuSpecs\build-nupkg.ps1 -BuildOutput "..\..\BuildOutput" -BuildFlavor "Release" -BuildArch "x64" -OutputDir "..\..\NugetPackage" -prereleaseversion "prerelease" -Subversion "001" -SkipFrameworkPackage -Variant "COMplicated.WinUI.Lite" -NuSpec "MUXControls-lite"
+        dotnet nuget push "$(Get-ChildItem NugetPackage\*.nupkg)" -k ${{ steps.login.outputs.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
+    - name: Upload nuget
+      uses: actions/upload-artifact@v7
+      with:
+        name: nuget
         path: NugetPackage

@@ -9,7 +9,9 @@ Param(
     [string]$BuildFlavor = "release",
     [string]$BuildArch = "x86",
     [switch]$NoDeleteTemp,
-    [switch]$SkipFrameworkPackage
+    [switch]$SkipFrameworkPackage,
+    [string]$Variant = "COMplicated.WinUI",
+    [string]$NuSpec = "MUXControls"
 )
 
 Write-Host "BuildOutput = '$BuildOutput'"
@@ -22,6 +24,8 @@ Write-Host "BuildFlavor = '$BuildFlavor'"
 Write-Host "BuildArch = '$BuildArch'"
 Write-Host "NoDeleteTemp = '$NoDeleteTemp'"
 Write-Host "SkipFrameworkPackage = '$SkipFrameworkPackage'"
+Write-Host "Variant = '$Variant'"
+Write-Host "NuSpec = '$NuSpec'"
 
 #
 # Version is read from the VERSION file.
@@ -80,8 +84,6 @@ if ($prereleaseversion)
 
 if (!(Test-Path $OutputDir)) { mkdir $OutputDir }
 
-$nupkgtitle = "COMplicated.WinUI"
-
 function New-TemporaryDirectory {
     $parent = [System.IO.Path]::GetTempPath()
     $name = [System.IO.Path]::GetRandomFileName()
@@ -125,11 +127,11 @@ Copy-IntoNewDirectory -IfExists $BuildOutput\$BuildFlavor\arm64\Microsoft.UI.Xam
 Copy-IntoNewDirectory -IfExists ..\..\dev\Materials\Acrylic\Assets\NoiseAsset_256x256_PNG.png "$runtimesDir\win-arm64\native\Microsoft.UI.Xaml\Assets"
 Copy-IntoNewDirectory -IfExists $BuildOutput\$BuildFlavor\AnyCPU\Microsoft.UI.Xaml.Projection\Microsoft.UI.Xaml.Projection.dll "$BuildOutput\$BuildFlavor\$BuildArch\Microsoft.UI.Xaml.Projection"
 
-$CommonNugetArgs = "-properties `"BuildOutput=$BuildOutput``;ID=$nupkgtitle``;RUNTIMESDIR=$runtimesDir`;TOOLSDIR=$toolsDir`;BUILDFLAVOR=$($BuildFlavor)`;BUILDARCH=$($BuildArch)`""
+$CommonNugetArgs = "-properties `"BuildOutput=$BuildOutput``;ID=$Variant``;RUNTIMESDIR=$runtimesDir`;TOOLSDIR=$toolsDir`;BUILDFLAVOR=$($BuildFlavor)`;BUILDARCH=$($BuildArch)`""
 
 $NugetArgs = "$CommonNugetArgs -OutputDirectory $OutputDir"
 
-$NugetCmdLine = "nuget pack MUXControls.nuspec $NugetArgs -version $version"
+$NugetCmdLine = "nuget pack $NuSpec.nuspec $NugetArgs -version $version"
 Write-Host $NugetCmdLine
 Invoke-Expression $NugetCmdLine
 if ($lastexitcode -ne 0)

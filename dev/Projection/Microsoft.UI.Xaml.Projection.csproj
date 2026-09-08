@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net9.0-windows10.0.22621.0</TargetFramework>
-    <WindowsTargetPlatformMinVersion>10.0.17763.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformMinVersion>10.0.15063.0</WindowsTargetPlatformMinVersion>
     <Platform>AnyCPU</Platform>
     <UseUwp>true</UseUwp>
     <IsAotCompatible>true</IsAotCompatible>
@@ -10,6 +10,7 @@
     <WindowsSdkPackageVersion>10.0.22621.87</WindowsSdkPackageVersion>
     <UseUwpTools>false</UseUwpTools>
     <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
+    <FeatureWebView2Enabled>true</FeatureWebView2Enabled>
   </PropertyGroup>
 
   <Import Project="$(MSBuildProjectDirectory)\..\..\version.props" />
@@ -43,13 +44,13 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Windows.CSWinRT" Version="2.3.1" />
-    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4191.47" IncludeAssets="none" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4191.47" IncludeAssets="none" Condition="$(FeatureWebView2Enabled) == 'true'" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\dll\Microsoft.UI.Xaml.vcxproj" />
-    <CsWinRTInputs Include="$(PkgMicrosoft_Web_WebView2)\lib\Microsoft.Web.WebView2.Core.winmd" />
+    <CsWinRTInputs Include="$(PkgMicrosoft_Web_WebView2)\lib\Microsoft.Web.WebView2.Core.winmd" Condition="$(FeatureWebView2Enabled) == 'true'" />
     <Reference
-       Include="$(PkgMicrosoft_Web_WebView2)\lib_manual\net8.0-windows10.0.17763.0\Microsoft.Web.WebView2.Core.Projection.dll" />
+       Include="$(PkgMicrosoft_Web_WebView2)\lib_manual\net8.0-windows10.0.17763.0\Microsoft.Web.WebView2.Core.Projection.dll" Condition="$(FeatureWebView2Enabled) == 'true'" />
   </ItemGroup>
 </Project>
