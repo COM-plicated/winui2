@@ -1,7 +1,7 @@
 
 # Windows UI Library
 
-[![WinUI2](https://img.shields.io/nuget/dt/COMplicated.WinUI?style=for-the-badge&label=COMplicated.WinUI&color=blue&link=https%3A%2F%2Fwww.nuget.org%2Fpackages%2FCOMplicated.WinUI)](https://www.nuget.org/packages/COMplicated.WinUI)
+[![WinUI2](https://img.shields.io/nuget/dt/COMplicated.WinUI?style=for-the-badge&label=COMplicated.WinUI&color=blue&link=https%3A%2F%2Fwww.nuget.org%2Fpackages%2FCOMplicated.WinUI)](https://www.nuget.org/packages/COMplicated.WinUI) [![WinUI2Lite](https://img.shields.io/nuget/dt/COMplicated.WinUI.Lite?style=for-the-badge&label=COMplicated.WinUI.Lite&color=blue&link=https%3A%2F%2Fwww.nuget.org%2Fpackages%2FCOMplicated.WinUI.Lite)](https://www.nuget.org/packages/COMplicated.WinUI.Lite)
 
 > [!NOTE]
 > This is a fork of WinUI 2 that includes both new fixes to known issues and unreleased fixes from Microsoft that never made into a stable release.

@@ -18,5 +18,5 @@
     <ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)..\..\runtimes\win-$(Native-Platform)\native\Microsoft.UI.Xaml.dll" />
     <ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)..\..\runtimes\win-$(Native-Platform)\native\Microsoft.UI.Xaml.pri" />
   </ItemGroup>
-  <Import Project="$(MSBuildThisFileDirectory)..\COMplicated.WinUI.targets"/>
+  <Import Project="$(MSBuildThisFileDirectory)..\COMplicated.WinUI.Lite.targets"/>
 </Project>

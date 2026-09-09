@@ -5,7 +5,7 @@ on:
       - "v*"
 jobs:
   buildWinUI:
-    name: Build project
+    name: Build full project
     runs-on: windows-2022
     strategy:
       matrix:
@@ -22,9 +22,8 @@ jobs:
         dotnet nuget config set globalPackagesFolder ".\packages" --configfile nuget.config
         dotnet nuget config set repositoryPath ".\packages" --configfile nuget.config
         .\build\PrepareVersion.ps1
-        MSBuild dev\dll\Microsoft.UI.Xaml.vcxproj -nologo -r -v:minimal /p:CL_MPCount=4 /p:RestorePackagesConfig=true /p:Configuration=Release /p:MUXVersionBuild=$env:MUXVersionBuild /p:MUXVersionRevision=$env:MUXVersionRevision /p:Platform=${{ matrix.arch }}
-        MSBuild dev\Microsoft.UI.Xaml.Design\Microsoft.UI.Xaml.Design.csproj -nologo -r -v:minimal /p:Configuration=Release /p:Platform=${{ matrix.arch }}
         MSBuild dev\Projection\Microsoft.UI.Xaml.Projection.csproj -nologo -r -v:minimal /p:Configuration=Release /p:MUXVersionBuild=$env:MUXVersionBuild /p:MUXVersionRevision=$env:MUXVersionRevision /p:Platform=${{ matrix.arch }}
+        MSBuild dev\Microsoft.UI.Xaml.Design\Microsoft.UI.Xaml.Design.csproj -nologo -r -v:minimal /p:Configuration=Release /p:Platform=${{ matrix.arch }}
     - name: Upload compiled files
       uses: actions/upload-artifact@v7
       with:
@@ -34,7 +33,7 @@ jobs:
           BuildOutput/Release/${{ matrix.arch }}
           .empty
   publishWinUI:
-    name: Publish Nuget package
+    name: Publish full Nuget package
     runs-on: windows-2025
     needs: buildWinUI
     permissions:
@@ -60,10 +59,10 @@ jobs:
     - name: Upload nuget
       uses: actions/upload-artifact@v7
       with:
-        name: nuget
+        name: nuget-full
         path: NugetPackage
   buildWinUILite:
-    name: Build project
+    name: Build lite project
     runs-on: windows-2022
     strategy:
       matrix:
@@ -80,9 +79,8 @@ jobs:
         dotnet nuget config set globalPackagesFolder ".\packages" --configfile nuget.config
         dotnet nuget config set repositoryPath ".\packages" --configfile nuget.config
         .\build\PrepareVersion.ps1
-        MSBuild dev\dll\Microsoft.UI.Xaml.vcxproj -nologo -r -v:minimal /p:CL_MPCount=4 /p:RestorePackagesConfig=true /p:Configuration=Release /p:MUXVersionBuild=$env:MUXVersionBuild /p:MUXVersionRevision=$env:MUXVersionRevision /p:FeatureWebView2Enabled=false /p:Platform=${{ matrix.arch }}
-        MSBuild dev\Microsoft.UI.Xaml.Design\Microsoft.UI.Xaml.Design.csproj -nologo -r -v:minimal /p:Configuration=Release /p:Platform=${{ matrix.arch }}
         MSBuild dev\Projection\Microsoft.UI.Xaml.Projection.csproj -nologo -r -v:minimal /p:Configuration=Release /p:MUXVersionBuild=$env:MUXVersionBuild /p:MUXVersionRevision=$env:MUXVersionRevision /p:FeatureWebView2Enabled=false /p:Platform=${{ matrix.arch }}
+        MSBuild dev\Microsoft.UI.Xaml.Design\Microsoft.UI.Xaml.Design.csproj -nologo -r -v:minimal /p:Configuration=Release /p:Platform=${{ matrix.arch }}
     - name: Upload compiled files
       uses: actions/upload-artifact@v7
       with:
@@ -92,7 +90,7 @@ jobs:
           BuildOutput/Release/${{ matrix.arch }}
           .empty
   publishWinUILite:
-    name: Publish Nuget package
+    name: Publish lite Nuget package
     runs-on: windows-2025
     needs: buildWinUILite
     permissions:
@@ -118,5 +116,5 @@ jobs:
     - name: Upload nuget
       uses: actions/upload-artifact@v7
       with:
-        name: nuget
+        name: nuget-lite
         path: NugetPackage
