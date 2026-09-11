@@ -3,6 +3,7 @@
     <TargetFramework>net9.0-windows10.0.22621.0</TargetFramework>
     <WindowsTargetPlatformMinVersion>10.0.15063.0</WindowsTargetPlatformMinVersion>
     <Platform>AnyCPU</Platform>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <UseUwp>true</UseUwp>
     <IsAotCompatible>true</IsAotCompatible>
     <DisableRuntimeMarshalling>true</DisableRuntimeMarshalling>

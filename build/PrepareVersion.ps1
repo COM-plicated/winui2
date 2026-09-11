@@ -9,3 +9,5 @@ $pstTime = [System.TimeZoneInfo]::ConvertTimeFromUtc((Get-Date).ToUniversalTime(
 $env:SubVersion = $SubVersion
 $env:MUXVersionBuild = ($pstTime).ToString("yyMM")
 $env:MUXVersionRevision = ($pstTime).ToString("dd") + $SubVersion
+
+Write-Host "Version = '$env:MUXVersionBuild$env:MUXVersionRevision'"
