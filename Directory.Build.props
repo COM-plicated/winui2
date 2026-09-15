@@ -10,6 +10,7 @@
     <Configuration Condition="'$(Configuration)' == 'Debug_test'">Debug</Configuration>
 
     <BaseOutputPath>$(MSBuildThisFileDirectory)BuildOutput\$(Configuration)\</BaseOutputPath>
+    <BaseOutputPath Condition="'$(TargetFramework)' != ''">$(MSBuildThisFileDirectory)BuildOutput\$(Configuration)\$(TargetFramework)\</BaseOutputPath>
     <BaseOutputPath Condition="'$(Configuration)' == 'Debug_test'">$(MSBuildThisFileDirectory)BuildOutput\Debug\</BaseOutputPath>
     <OutDir>$(BaseOutputPath)\$(Platform)\</OutDir>
 
@@ -20,6 +21,7 @@
     <OutputPath>$(OutDir)\$(MSBuildProjectName)\</OutputPath>
 
     <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)BuildOutput\Intermediates\$(Platform)\$(MSBuildProjectName)\obj\</BaseIntermediateOutputPath>
+    <BaseIntermediateOutputPath Condition="'$(TargetFramework)' != ''">$(MSBuildThisFileDirectory)BuildOutput\Intermediates\$(Platform)\$(MSBuildProjectName)\obj\$(TargetFramework)\</BaseIntermediateOutputPath>
     <MSBuildProjectExtensionsPath>$(MSBuildThisFileDirectory)BuildOutput\Intermediates\$(MSBuildProjectName)\obj\</MSBuildProjectExtensionsPath>
     <IntDir>$(BaseIntermediateOutputPath)</IntDir>
     <IntermediateOutputPath>$(BaseIntermediateOutputPath)</IntermediateOutputPath>

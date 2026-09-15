@@ -15,8 +15,25 @@
     <iconUrl>https://aka.ms/winui_icon</iconUrl>
     <readme>docs\README.md</readme>
 
+
+    <dependencies>
+      <group targetFramework="net9.0-windows10.0.22621.0">
+      </group>
+      <group targetFramework="net10.0-windows10.0.22621.1">
+      </group>
+      <group targetFramework="uap10.0">
+      </group>
+    </dependencies>
+    <references>
+      <group targetFramework="net10.0-windows10.0.22621.1">
+        <reference file="Microsoft.UI.Xaml.Projection.dll" />
+      </group>
+    </references>
     <frameworkReferences>
       <group targetFramework="net9.0-windows10.0.22621.0">
+        <frameworkReference name="Microsoft.Windows.SDK.NET.Ref.Xaml" />
+      </group>
+      <group targetFramework="net10.0-windows10.0.22621.1">
         <frameworkReference name="Microsoft.Windows.SDK.NET.Ref.Xaml" />
       </group>
     </frameworkReferences>
@@ -32,9 +49,14 @@
     <file target="lib\uap10.0\Microsoft.UI.Xaml\Themes" src="$BUILDOUTPUT$\$BUILDFLAVOR$\$BUILDARCH$\Microsoft.UI.Xaml\Generic.xaml"/>
     <file target="lib\uap10.0\Design" src="$BUILDOUTPUT$\$BUILDFLAVOR$\$BUILDARCH$\Microsoft.UI.Xaml.Design\Microsoft.UI.Xaml.design.dll"/>
 
-    <file target="lib\net9.0-windows10.0.22621.0\Microsoft.UI.Xaml.Projection.dll" src="$BUILDOUTPUT$\$BUILDFLAVOR$\$BUILDARCH$\Microsoft.UI.Xaml.Projection\Microsoft.UI.Xaml.Projection.dll" />
+    <file target="lib\net9.0-windows10.0.22621.0\Microsoft.UI.Xaml.Projection.dll" src="$BUILDOUTPUT$\$BUILDFLAVOR$\net9.0-windows10.0.22621.0\$BUILDARCH$\Microsoft.UI.Xaml.Projection\Microsoft.UI.Xaml.Projection.dll" />
     <file target="lib\net9.0-windows10.0.22621.0\Microsoft.UI.Xaml\Themes" src="$BUILDOUTPUT$\$BUILDFLAVOR$\$BUILDARCH$\Microsoft.UI.Xaml\Generic.xaml"/>
     <file target="lib\net9.0-windows10.0.22621.0\Microsoft.UI.Xaml.Projection.xml" src="Intellisense\Microsoft.UI.Xaml.xml"/>
+
+    <file target="lib\net10.0-windows10.0.22621.1\Microsoft.UI.Xaml.Projection.dll" src="$BUILDOUTPUT$\$BUILDFLAVOR$\net10.0-windows10.0.22621.1\$BUILDARCH$\Microsoft.UI.Xaml.Projection\Microsoft.UI.Xaml.Projection.dll" />
+    <file target="lib\net10.0-windows10.0.22621.1\Microsoft.UI.Xaml\Themes" src="$BUILDOUTPUT$\$BUILDFLAVOR$\$BUILDARCH$\Microsoft.UI.Xaml\Generic.xaml"/>
+    <file target="lib\net10.0-windows10.0.22621.1\Microsoft.UI.Xaml.Projection.xml" src="Intellisense\Microsoft.UI.Xaml.xml"/>
+    <file target="ref\net10.0-windows10.0.22621.1\Microsoft.UI.Xaml.Projection.dll" src="$BUILDOUTPUT$\$BUILDFLAVOR$\net10.0-windows10.0.22621.1\$BUILDARCH$\Microsoft.UI.Xaml.Projection\ref\Microsoft.UI.Xaml.Projection.dll" />
 
     <file target="runtimes" src="$RUNTIMESDIR$\**\*.*"/>
 
