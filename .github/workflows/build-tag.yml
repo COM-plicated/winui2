@@ -30,7 +30,7 @@ jobs:
         name: intermediates-full-${{ matrix.arch }}
         retention-days: 1
         path: |
-          BuildOutput/Release/${{ matrix.arch }}
+          BuildOutput/Release
           .empty
   publishWinUI:
     name: Publish full Nuget package
@@ -88,7 +88,7 @@ jobs:
         name: intermediates-lite-${{ matrix.arch }}
         retention-days: 1
         path: |
-          BuildOutput/Release/${{ matrix.arch }}
+          BuildOutput/Release
           .empty
   publishWinUILite:
     name: Publish lite Nuget package
