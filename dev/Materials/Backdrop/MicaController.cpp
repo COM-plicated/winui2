@@ -218,10 +218,15 @@ void MicaController::Crossfade(const winrt::Windows::UI::Composition::Compositio
         crossFadeBrush.StartAnimation(L"Crossfade.Weight", animation);
         crossFadeAnimationBatch.End();
 
-        crossFadeAnimationBatch.Completed([weakThis = get_weak(), newBrush](auto&&, auto&&)
+        crossFadeAnimationBatch.Completed([weakThis = get_weak(), newBrush, crossFadeBrush](auto&&, auto&&)
         {
             if (auto self = weakThis.get())
             {
+                auto currentBrush = self->m_target.get().SystemBackdrop();
+
+                if (crossFadeBrush != currentBrush)
+                    return;
+
                 self->UpdateSystemBackdropBrush(newBrush);
             }
         });

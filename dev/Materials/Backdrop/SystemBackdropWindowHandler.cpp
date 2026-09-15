@@ -59,7 +59,7 @@ namespace SystemBackdropComponentInternal
             {
                 dispatcherQueue.TryEnqueue([weakThis]()
                     {
-                        auto strongThis= weakThis.get();
+                        auto strongThis = weakThis.get();
                         if (strongThis)
                         {
                             if (strongThis->m_capabilities.AreEffectsFast())
@@ -199,7 +199,7 @@ namespace SystemBackdropComponentInternal
         {
             m_themeEventRevoker = root.ActualThemeChanged(winrt::auto_revoke, [this](auto&&, auto&&)
                 {
-                RefreshTheme();
+                    RefreshTheme();
                 });
 
             // On first run, we must update the theme so that the controller has the correct configuration.
