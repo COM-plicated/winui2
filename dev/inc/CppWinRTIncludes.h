@@ -7,7 +7,6 @@
 #include <winrt\Windows.Foundation.h>
 #include <winrt\Windows.Foundation.Collections.h>
 #include <winrt\Windows.Foundation.Metadata.h>
-#include <winrt\Windows.ApplicationModel.Activation.h>
 #include <winrt\Windows.ApplicationModel.Contacts.h>
 #include <winrt\Windows.ApplicationModel.Core.h>
 #include <winrt\Windows.ApplicationModel.DataTransfer.h>
@@ -115,7 +114,6 @@
 namespace winrt
 {
     using namespace ::winrt::Windows;
-    using namespace ::winrt::Windows::ApplicationModel::Activation;
     using namespace ::winrt::Windows::ApplicationModel::Contacts;
     using namespace ::winrt::Windows::ApplicationModel::Core;
     using namespace ::winrt::Windows::ApplicationModel::DataTransfer;
