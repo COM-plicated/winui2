@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net9.0-windows10.0.22621.0;net10.0-windows10.0.22621.1</TargetFrameworks>
+    <TargetFramework>net9.0-windows10.0.22621.0</TargetFramework>
     <WindowsTargetPlatformMinVersion>10.0.15063.0</WindowsTargetPlatformMinVersion>
     <Platform>AnyCPU</Platform>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -8,13 +8,9 @@
     <IsAotCompatible>true</IsAotCompatible>
     <DisableRuntimeMarshalling>true</DisableRuntimeMarshalling>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <WindowsSdkPackageVersion Condition="'$(TargetFramework)' == 'net9.0-windows10.0.22621.0'">10.0.22621.87</WindowsSdkPackageVersion>
-    <WindowsSdkPackageVersion Condition="'$(TargetFramework)' == 'net10.0-windows10.0.22621.1'">10.0.22621.88-preview</WindowsSdkPackageVersion>
-    <CsWinRTGenerateReferenceProjection Condition="'$(TargetFramework)' == 'net10.0-windows10.0.22621.1'">true</CsWinRTGenerateReferenceProjection>
+    <WindowsSdkPackageVersion>10.0.22621.87</WindowsSdkPackageVersion>
     <UseUwpTools>false</UseUwpTools>
     <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <ImplicitUsings>true</ImplicitUsings>
     <FeatureWebView2Enabled>true</FeatureWebView2Enabled>
   </PropertyGroup>
 
@@ -48,15 +44,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Windows.CSWinRT" Version="2.3.1" Condition="'$(TargetFramework)' == 'net9.0-windows10.0.22621.0'" />
-    <PackageReference Include="Microsoft.Windows.CSWinRT" Version="3.0.0-preview.261104.1" Condition="'$(TargetFramework)' == 'net10.0-windows10.0.22621.1'" />
+    <PackageReference Include="Microsoft.Windows.CSWinRT" Version="2.3.1" />
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4191.47" IncludeAssets="none" Condition="$(FeatureWebView2Enabled) == 'true'" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\dll\Microsoft.UI.Xaml.vcxproj" />
     <CsWinRTInputs Include="$(PkgMicrosoft_Web_WebView2)\lib\Microsoft.Web.WebView2.Core.winmd" Condition="$(FeatureWebView2Enabled) == 'true'" />
-    <Reference
-      Include="$(PkgMicrosoft_Web_WebView2)\lib_manual\net8.0-windows10.0.17763.0\Microsoft.Web.WebView2.Core.Projection.dll" Condition="$(FeatureWebView2Enabled) == 'true'" />
+    <Reference Include="$(PkgMicrosoft_Web_WebView2)\lib_manual\net8.0-windows10.0.17763.0\Microsoft.Web.WebView2.Core.Projection.dll" Condition="$(FeatureWebView2Enabled) == 'true'" />
   </ItemGroup>
 </Project>

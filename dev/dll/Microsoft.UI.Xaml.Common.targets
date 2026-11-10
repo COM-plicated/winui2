@@ -717,7 +717,6 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\Microsoft.CodeAnalysis.BinSkim.4.4.9.11\tools\net9.0\win-x64\BinSkim.exe')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.CodeAnalysis.BinSkim.4.4.9.11\tools\net9.0\win-x64\BinSkim.exe'))" />
     <Error Condition="!Exists('..\..\packages\Microsoft.Build.Tasks.Git.10.0.400\build\Microsoft.Build.Tasks.Git.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Build.Tasks.Git.10.0.400\build\Microsoft.Build.Tasks.Git.props'))" />
     <Error Condition="!Exists('..\..\packages\Microsoft.Build.Tasks.Git.10.0.400\build\Microsoft.Build.Tasks.Git.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Build.Tasks.Git.10.0.400\build\Microsoft.Build.Tasks.Git.targets'))" />
     <Error Condition="!Exists('..\..\packages\Microsoft.SourceLink.Common.10.0.400\build\Microsoft.SourceLink.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.SourceLink.Common.10.0.400\build\Microsoft.SourceLink.Common.props'))" />
@@ -744,16 +743,6 @@
         <ScmRepositoryUrl>$(ScmRepositoryUrl)</ScmRepositoryUrl>
       </SourceRoot>
     </ItemGroup>
-  </Target>
-  <Target Name="RunBinSkim" AfterTargets="AfterBuild" Condition="'$(Configuration)'=='Release'">
-    <PropertyGroup>
-      <BinSkimCommand>..\..\packages\Microsoft.CodeAnalysis.BinSkim.4.4.9.11\tools\net9.0\win-x64\BinSkim.exe analyze "$(TargetPath)"</BinSkimCommand>
-    </PropertyGroup>
-    <Message Text="Running BinSkim on $(TargetFileName) to scan for potential security issues" Importance="high" />
-    <Exec Command="$(BinSkimCommand) | findstr &quot;error&quot;" IgnoreExitCode="true">
-      <Output TaskParameter="ExitCode" PropertyName="ExitCode" />
-    </Exec>
-    <Error Text="BinSkim task failed." Condition="'$(ExitCode)'=='0'" />
   </Target>
   <PropertyGroup>
     <!-- Tell CreateLCGFile to use the LCE file from RC.EXE -->

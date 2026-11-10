@@ -13,6 +13,11 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v6
+    - name: Install .NET SDK
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: |
+          11.0.x
     - name: Prepare Environment
       uses: microsoft/setup-msbuild@v3
       with:
@@ -71,6 +76,11 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v6
+    - name: Install .NET SDK
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: |
+          11.0.x
     - name: Prepare Environment
       uses: microsoft/setup-msbuild@v3
       with:
@@ -81,6 +91,7 @@ jobs:
         dotnet nuget config set repositoryPath ".\packages" --configfile nuget.config
         .\build\PrepareVersion.ps1 -SubVersion $("${{ github.ref_name }}"[-3..-1] -join "")
         MSBuild dev\Projection\Microsoft.UI.Xaml.Projection.csproj -nologo -r -v:minimal /p:RestorePackagesConfig=true /p:Configuration=Release /p:MUXVersionBuild=$env:MUXVersionBuild /p:MUXVersionRevision=$env:MUXVersionRevision /p:FeatureWebView2Enabled=false /p:Platform=${{ matrix.arch }}
+        MSBuild dev\Projection\Microsoft.UI.Xaml.Projection.CsWinRT3.csproj -nologo -r -v:minimal /p:RestorePackagesConfig=true /p:Configuration=Release /p:MUXVersionBuild=$env:MUXVersionBuild /p:MUXVersionRevision=$env:MUXVersionRevision /p:FeatureWebView2Enabled=false /p:Platform=${{ matrix.arch }}
         MSBuild dev\Microsoft.UI.Xaml.Design\Microsoft.UI.Xaml.Design.csproj -nologo -r -v:minimal /p:Configuration=Release /p:Platform=${{ matrix.arch }}
     - name: Upload compiled files
       uses: actions/upload-artifact@v7
