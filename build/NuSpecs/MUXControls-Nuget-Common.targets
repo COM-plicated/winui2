@@ -29,6 +29,7 @@
       <ProjectName>$(ProjectName)</ProjectName>
       <Implementation Condition="'$(MicrosoftUIXamlAppxVersion)' == ''">Microsoft.UI.Xaml.dll</Implementation>
     </XamlWinmd>
+    <CsWinRTInputs Include="$(MSBuildThisFileDirectory)..\lib\uap10.0\Microsoft.UI.Xaml.winmd" />
   </ItemGroup>
   <PropertyGroup>
     <XamlWinmdName>Microsoft.UI.Xaml.winmd</XamlWinmdName>
